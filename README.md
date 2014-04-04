@@ -24,6 +24,7 @@ These are some steps you can follow to build up a scripted test, and then store 
 <h3>Step 1:</h3>
 Call your instance of WebPageTest with your URL of choice and get back a 200 response
 
+<pre><code>
 [code language="ruby"]
 #!/usr/bin/env ruby
 require "net/http"
@@ -34,7 +35,7 @@ baseurl = "http://[WEB PAGE TEST SERVER]/runtest.php?runs=1&f=xml&fvonly=1&url=#
 
 response = Net::HTTP.get(URI(baseurl))
 puts response
-[/code]
+</code></pre>
 
 At this point you should get a response that looks something like this:
 
