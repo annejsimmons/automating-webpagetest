@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: web_page_test_results
+      hosts:
+        - localhost:27017
