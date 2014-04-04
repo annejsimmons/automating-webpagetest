@@ -25,7 +25,6 @@ These are some steps you can follow to build up a scripted test, and then store 
 Call your instance of WebPageTest with your URL of choice and get back a 200 response
 
 <pre><code>
-[code language="ruby"]
 #!/usr/bin/env ruby
 require "net/http"
 require "uri"
@@ -39,7 +38,7 @@ puts response
 
 At this point you should get a response that looks something like this:
 
-[code language="xml"]
+<pre><code>
 <!--?xml version="1.0" encoding="UTF-8"?-->
 
   200
@@ -54,13 +53,13 @@ At this point you should get a response that looks something like this:
     http://[WEB PAGE TEST SERVER]/jsonResult.php?test=130723_9Y_BM/
   </data>
 
-[/code]
+</code></pre>
 
 WebPageTest will asynchronously run the tests and dump the results into the locations returned above. As you can see there are lots of different formats that you can consume for the results data. Everything that I needed was in the summaryCSV.
 <h3>Step 2:</h3>
 Parse the URL to get the summaryCSV and then poll that until the results appear (as we have no idea of knowing when they will appear I checked every 5 seconds until I no longer got a 404 response). I then parse the CSV response into a 2 dimensional array, where the first array are the headers, and the second is their values. You can then see all the results that come back and which ones might be interesting for you.
 
-[code language="ruby"]
+<pre><code>
 #!/usr/bin/env ruby
 
 require "net/http"
@@ -87,7 +86,7 @@ end
 raw_results = CSV.parse(csv_content.body, {:headers => true, :return_headers => true, :header_converters => :symbol, :converters => :all})
 
 puts raw_results
-[/code]
+</code></pre>
 
 <h3>Step 3:</h3>
 Great! Now I have test results coming back and I want to save the ones I'm interested in so that I can visually represent them later and look at the changes in performance over time.
@@ -95,18 +94,18 @@ I'm going to use mongoDB to store the results of the tests. I created a class ca
 At this point you will need mongoDB up and running and you will also need a .yml file to define your mongoDB setup.
 mongoid.yml
 
-[code]
+<pre><code>
 development:
   sessions:
     default:
       database: web_page_test_results
       hosts:
         - localhost:27017
-[/code]
+</code></pre>
 
 My scripts now looks like this:
 
-[code language="ruby"]
+<pre><code>
 #!/usr/bin/env ruby
 
 require "net/http"
@@ -151,16 +150,16 @@ TestResults.create({
 	:time_to_first_byte => raw_results[1][:time_to_first_byte_ms],
 	:csv_url => csv_url
 	})
-[/code]
+</code></pre>
 
 And my mongoDB happily contains the result of my first test, which will look something like this
 
-[code]
+<pre><code>
 db.test_results.find()
 { "_id" : ObjectId("51eef7cee055e6cee5000001"), "timestamp_of_test" : ISODate("2013-07-24T21:38:04Z"), "load_time" : 3566, "time_to_first_byte" : 317, "csv_url" : "http://[WEB PAGE TEST SERVER]/result/130723_RW_CN/page_data.csv" }
-[/code]
+</code></pre>
 
 <h3>What next?</h3>
 If I had had a chance to extend this, I would of loved to of added visualisation, using a graphing framework and deploying the results to a web service so that everyone can see the change over time and drill down into any of the suspicious looking results.
 
-Originally posted at <a href="http://annejsimmons.com/2013/07/26/automating-webpagetest-with-a-ruby-script/" /> 
+Originally posted at <a href="http://annejsimmons.com/2013/07/26/automating-webpagetest-with-a-ruby-script/" /> Automating webpage test with a Ruby script
