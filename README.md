@@ -162,4 +162,4 @@ db.test_results.find()
 <h3>What next?</h3>
 If I had had a chance to extend this, I would of loved to of added visualisation, using a graphing framework and deploying the results to a web service so that everyone can see the change over time and drill down into any of the suspicious looking results.
 
-Originally posted at <a href="http://annejsimmons.com/2013/07/26/automating-webpagetest-with-a-ruby-script/" target="_blank"/>
+Originally posted at <a href="http://annejsimmons.com/2013/07/26/automating-webpagetest-with-a-ruby-script/">Automating Webpagetest with a Ruby script</a>
