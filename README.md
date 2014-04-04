@@ -38,7 +38,7 @@ puts response
 
 At this point you should get a response that looks something like this:
 
-<pre><code>
+<pre>
 <!--?xml version="1.0" encoding="UTF-8"?-->
 
   200
@@ -53,7 +53,7 @@ At this point you should get a response that looks something like this:
     http://[WEB PAGE TEST SERVER]/jsonResult.php?test=130723_9Y_BM/
   </data>
 
-</code></pre>
+</pre>
 
 WebPageTest will asynchronously run the tests and dump the results into the locations returned above. As you can see there are lots of different formats that you can consume for the results data. Everything that I needed was in the summaryCSV.
 <h3>Step 2:</h3>
@@ -162,4 +162,4 @@ db.test_results.find()
 <h3>What next?</h3>
 If I had had a chance to extend this, I would of loved to of added visualisation, using a graphing framework and deploying the results to a web service so that everyone can see the change over time and drill down into any of the suspicious looking results.
 
-Originally posted at <a href="http://annejsimmons.com/2013/07/26/automating-webpagetest-with-a-ruby-script/" /> Automating webpage test with a Ruby script
+Originally posted at <a href="http://annejsimmons.com/2013/07/26/automating-webpagetest-with-a-ruby-script/" target="_blank"/>
